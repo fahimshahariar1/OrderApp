@@ -1,4 +1,5 @@
 ﻿using OrderApp1.Models;
+using Serilog;
 
 namespace OrderApp1.Services
 {
@@ -9,15 +10,26 @@ namespace OrderApp1.Services
 
         public async Task AddProductAsync(string name, decimal price)
         {
-            await Task.Delay(300); // Simulate async operation
-
-            var product = new Product
+            try
             {
-                Id = _nextId++,
-                Name = name,
-                Price = price
-            };
-            products.Add(product);
+                await Task.Delay(300); // Simulate async operation
+
+                var product = new Product
+                {
+                    Id = _nextId++,
+                    Name = name,
+                    Price = price
+                };
+                products.Add(product);
+                Log.Information($"Product Added: {name}, Price: {price}");
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex, $"Failed to add product: {name}");
+                throw;
+            }
+
 
         }
 

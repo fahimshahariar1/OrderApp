@@ -1,4 +1,5 @@
 ﻿using OrderApp1.Models;
+using Serilog;
 
 namespace OrderApp1.Services
 {
@@ -10,14 +11,23 @@ namespace OrderApp1.Services
         public async Task AddCustomerAsync(string name, string email)
         {
 
-            await Task.Delay(200); // Simulate async operation
-            var customer = new Customer
+            try
             {
-                Id = _nextId++,
-                Name = name,
-                Email = email
-            };
-            customers.Add(customer);
+                await Task.Delay(200); // Simulate async operation
+                var customer = new Customer
+                {
+                    Id = _nextId++,
+                    Name = name,
+                    Email = email
+                };
+                customers.Add(customer);
+                Log.Information($"Customer Added: {name}, Email: {email}");
+            }
+            catch (Exception)
+            {
+                Log.Error($"Failed to add customer: {name}");
+                throw;
+            }
         }
 
         public List<Customer> GetAllCustomers()
