@@ -7,8 +7,9 @@ namespace OrderApp1.Services
         private readonly List<Product> products = new();
         private int _nextId = 1;
 
-        public void AddProduct(string name, decimal price)
+        public async Task AddProductAsync(string name, decimal price)
         {
+            await Task.Delay(300); // Simulate async operation
 
             var product = new Product
             {

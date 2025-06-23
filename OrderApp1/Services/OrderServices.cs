@@ -7,12 +7,14 @@ namespace OrderApp1.Services
         private readonly List<Order> orders = new();
         private int _nextOrderId = 1;
 
-        public void CreateOrder(Customer customer, List<(Product product, int quantity)> items)
+        public async Task CreateOrderAsync(Customer customer, List<(Product product, int quantity)> items)
         {
             if (customer == null || items == null || !items.Any())
             {
                 throw new ArgumentException("Inavlid Order Data");
             }
+
+            await Task.Delay(500); // Simulate async operation
 
             var order = new Order
             {

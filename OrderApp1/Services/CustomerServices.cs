@@ -7,8 +7,10 @@ namespace OrderApp1.Services
         private readonly List<Customer> customers = new();
         private int _nextId = 1;
 
-        public void AddCustomer(string name, string email)
+        public async Task AddCustomerAsync(string name, string email)
         {
+
+            await Task.Delay(200); // Simulate async operation
             var customer = new Customer
             {
                 Id = _nextId++,
