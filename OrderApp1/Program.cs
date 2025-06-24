@@ -118,7 +118,7 @@ class Program
             static void ShowMenu()
             {
                 Console.WriteLine("\n=== Order Management System ===");
-                Console.WriteLine("1. Add Product");
+                Console.WriteLine("\n1. Add Product");
                 Console.WriteLine("2. Add Customer");
                 Console.WriteLine("3. Place Order");
                 Console.WriteLine("4. View Orders");
